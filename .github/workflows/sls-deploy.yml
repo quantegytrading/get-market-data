@@ -20,8 +20,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - name: serverless deploy
-#      uses: serverless/github-action@master
-      uses: jackdcasey/github-action@python3.8-nodejs13
+      uses: quantegytrading/github-action@master
       with:
         args: -c "serverless plugin install -n serverless-python-requirements && serverless deploy --verbose"
         entrypoint: /bin/bash
