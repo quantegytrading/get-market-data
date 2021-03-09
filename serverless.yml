@@ -33,13 +33,12 @@ functions:
     handler: handler.main
     timeout: 90
     environment:
-      eid: ${{ EXCHANGE_ID }}
-      key: ${{ API_KEY }}
-      secret: ${{ API_SECRET }}
+      eid: ${EXCHANGE_ID}
+      key: ${API_KEY}
+      secret: ${API_SECRET}
 
     events:
-      - eventBridge:
-          schedule: rate(1 minute)
+      - schedule: rate(1 minute)
 
 plugins:
   - serverless-python-requirements
