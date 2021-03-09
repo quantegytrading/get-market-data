@@ -1,0 +1,49 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: quantegy-ingest
+
+provider:
+  name: aws
+  runtime: python3.7
+
+  stage: live
+  region: us-east-1
+  iam:
+    role:
+      managedPolicies:
+        - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonTimestreamFullAccess'
+
+
+functions:
+  get-market-data:
+    handler: handler.index
+    timeout: 90
+    environment:
+      eid: ${{ secrets.EXCHANGE_ID }}
+      key: ${{ secrets.API_KEY }}
+      secret: ${{ secrets.API_SECRET }}
+
+    events:
+      - eventBridge:
+          schedule: rate(1 minute)
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
