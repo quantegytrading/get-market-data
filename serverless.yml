@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: quantegy
+service: quantegy-ingest
 
 provider:
   name: aws
@@ -19,7 +19,6 @@ provider:
   stage: live
   region: us-east-1
   lambdaHashingVersion: 20201221
-  eventBridge.useCloudFormation: true
   iam:
     role:
       managedPolicies:
