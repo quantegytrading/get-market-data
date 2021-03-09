@@ -18,4 +18,8 @@
   "homepage": "https://github.com/quantegytrading/get-market-data#readme",
   "dependencies": {
     "serverless-python-requirements": "^5.1.0"
+  },
+  "devDependencies": {
+    "serverless-secrets-plugin": "^0.1.0"
+  }
 }
