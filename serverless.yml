@@ -22,11 +22,10 @@ provider:
   iam:
     role:
       managedPolicies:
-        - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
-        - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
-        - 'arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess'
-        - 'arn:aws:iam::aws:policy/AmazonTimestreamFullAccess'
-
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+        - arn:aws:iam::aws:policy/AmazonSNSFullAccess
+        - arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
+        - arn:aws:iam::aws:policy/AmazonTimestreamFullAccess
 
 functions:
   get-market-data:
