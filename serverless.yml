@@ -15,7 +15,7 @@ service: quantegy-ingest
 
 provider:
   name: aws
-  runtime: python3.9
+  runtime: python3.8
   stage: live
   region: us-east-1
   lambdaHashingVersion: 20201221
@@ -47,4 +47,3 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
-    pythonBin: python3
