@@ -16,9 +16,10 @@ service: quantegy-ingest
 provider:
   name: aws
   runtime: python3.7
-
   stage: live
   region: us-east-1
+  lambdaHashingVersion: 20201221
+  eventBridge.useCloudFormation: true
   iam:
     role:
       managedPolicies:
