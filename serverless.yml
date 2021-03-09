@@ -33,9 +33,9 @@ functions:
     handler: handler.main
     timeout: 90
     environment:
-      eid: ${{ secrets.EXCHANGE_ID }}
-      key: ${{ secrets.API_KEY }}
-      secret: ${{ secrets.API_SECRET }}
+      eid: ${{ EXCHANGE_ID }}
+      key: ${{ API_KEY }}
+      secret: ${{ API_SECRET }}
 
     events:
       - eventBridge:

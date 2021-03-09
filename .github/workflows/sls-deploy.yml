@@ -28,3 +28,6 @@ jobs:
       env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         EXCHANGE_ID: ${{ secrets.EXCHANGE_ID }}
+         API_KEY: ${{ secrets.API_KEY }}
+         API_SECRET: ${{ secrets.API_SECRET }}
