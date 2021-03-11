@@ -24,6 +24,7 @@ def main(event, context):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('market-data')
     exchange = init_exchange()
+    market_data = []
     # time.sleep(exchange.rateLimit / 1000)  # time.sleep wants seconds
     if exchange.has['fetchOHLCV']:
         for symbol in exchange.markets:
@@ -35,17 +36,27 @@ def main(event, context):
                 since = (unixtime - 10 * 60) * 1000  # UTC timestamp in milliseconds
 
                 data = json.dumps(exchange.fetch_ohlcv(symbol, '1m', since=since))
+                item = {
+                    'symbol': symbol[:-4],
+                    'data': data,
+                }
+                market_data.append(item)
                 with table.batch_writer() as batch:
                     batch.put_item(
-                        Item={
-                            'symbol': symbol[:-4],
-                            'data': data,
-                        }
+                        Item=item
                     )
     print(exchange.currencies.keys())
+
+    message = {
+        'exchange': 'binance',
+        'data_type': 'live',
+        'currencies': exchange.currencies.keys(),
+        'market_data': market_data
+    }
+
     sns.publish(
         TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data',
-        Message=json.dumps(list(exchange.currencies.keys()))
+        Message=json.dumps(message)
     )
 
 
