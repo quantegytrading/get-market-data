@@ -50,7 +50,6 @@ def main(event, context):
     message = {
         'exchange': 'binance',
         'data_type': 'live',
-        'currencies': exchange.currencies.keys(),
         'market_data': market_data
     }
 
