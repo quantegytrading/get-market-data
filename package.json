@@ -2,7 +2,7 @@
   "name": "get-market-data",
   "version": "1.0.0",
   "description": "retrieve live binance market data",
-  "main": "handler.py",
+  "main": "binance.py",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
