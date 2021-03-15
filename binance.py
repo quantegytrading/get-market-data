@@ -33,7 +33,7 @@ def main(event, context):
                 now = datetime.utcnow()
                 unixtime = calendar.timegm(now.utctimetuple())
                 # (unixtime - num mins * sixty seconds) * 1000 ms
-                since = (unixtime - 10 * 60) * 1000  # UTC timestamp in milliseconds
+                since = (unixtime - 30 * 60) * 1000  # UTC timestamp in milliseconds
 
                 data = json.dumps(exchange.fetch_ohlcv(symbol, '1m', since=since))
 
