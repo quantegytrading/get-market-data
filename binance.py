@@ -42,10 +42,10 @@ def main(event, context):
                     'data': data,
                 }
                 market_data.append(item)
-                with table.batch_writer() as batch:
-                    batch.put_item(
-                        Item=item
-                    )
+                # with table.batch_writer() as batch:
+                #     batch.put_item(
+                #         Item=item
+                #     )
     print(exchange.currencies.keys())
 
     message = {
