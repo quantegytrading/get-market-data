@@ -1,9 +1,9 @@
-name: Deploy live branch
+name: Deploy main branch
 
 on:
   push:
     branches:
-      - live
+      - main
 
 jobs:
   deploy:
