@@ -1,4 +1,4 @@
-# binance.py
+# binance_commons.py
 import calendar
 from datetime import datetime
 import json
@@ -19,38 +19,26 @@ def init_exchange():
     return exchange
 
 
-def main(event, context):
+def go(interval, since):
     sns = boto3.client('sns')
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('market-data')
     exchange = init_exchange()
     market_data = []
-    # time.sleep(exchange.rateLimit / 1000)  # time.sleep wants seconds
     if exchange.has['fetchOHLCV']:
         for symbol in exchange.markets:
-            # time.sleep(exchange.rateLimit / 1000)  # time.sleep wants seconds
             if symbol[-4:] == "/USD":
-                now = datetime.utcnow()
-                unixtime = calendar.timegm(now.utctimetuple())
-                # (unixtime - num mins * sixty seconds) * 1000 ms
-                since = (unixtime - 30 * 60) * 1000  # UTC timestamp in milliseconds
-
-                data = json.dumps(exchange.fetch_ohlcv(symbol, '1m', since=since))
-
+                data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
                 item = {
                     'symbol': symbol[:-4],
                     'data': data,
                 }
                 market_data.append(item)
-                # with table.batch_writer() as batch:
-                #     batch.put_item(
-                #         Item=item
-                #     )
     print(exchange.currencies.keys())
 
     message = {
         'exchange': 'binance',
         'data_type': 'live',
+        'interval': interval,
         'market_data': market_data
     }
 
@@ -58,7 +46,3 @@ def main(event, context):
         TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
         Message=json.dumps(message)
     )
-
-
-if __name__ == "__main__":
-    main('', '')
