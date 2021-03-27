@@ -28,24 +28,24 @@ provider:
         - arn:aws:iam::aws:policy/AmazonTimestreamFullAccess
 
 functions:
-  get-market-data-binance-1m:
-    handler: binance_1m.main
-    timeout: 90
-    environment:
-      eid: ${env:EXCHANGE_ID}
-      key: ${env:API_KEY}
-      secret: ${env:API_SECRET}
-    events:
-      - schedule: rate(1 minute)
-  get-market-data-binance-15m:
-    handler: binance_15m.main
-    timeout: 90
-    environment:
-      eid: ${env:EXCHANGE_ID}
-      key: ${env:API_KEY}
-      secret: ${env:API_SECRET}
-    events:
-      - schedule: rate(15 minutes)
+#  get-market-data-binance-1m:
+#    handler: binance_1m.main
+#    timeout: 90
+#    environment:
+#      eid: ${env:EXCHANGE_ID}
+#      key: ${env:API_KEY}
+#      secret: ${env:API_SECRET}
+#    events:
+#      - schedule: rate(1 minute)
+#  get-market-data-binance-15m:
+#    handler: binance_15m.main
+#    timeout: 90
+#    environment:
+#      eid: ${env:EXCHANGE_ID}
+#      key: ${env:API_KEY}
+#      secret: ${env:API_SECRET}
+#    events:
+#      - schedule: rate(15 minutes)
   get-market-data-binance-1h:
     handler: binance_1h.main
     timeout: 90
