@@ -55,15 +55,15 @@ functions:
       secret: ${env:API_SECRET}
     events:
       - schedule: rate(1 hour)
-  get-market-data-binance-1d:
-    handler: binance_1d.main
-    timeout: 90
-    environment:
-      eid: ${env:EXCHANGE_ID}
-      key: ${env:API_KEY}
-      secret: ${env:API_SECRET}
-    events:
-      - schedule: rate(24 hours)
+#  get-market-data-binance-1d:
+#    handler: binance_1d.main
+#    timeout: 90
+#    environment:
+#      eid: ${env:EXCHANGE_ID}
+#      key: ${env:API_KEY}
+#      secret: ${env:API_SECRET}
+#    events:
+#      - schedule: rate(24 hours)
 plugins:
   - serverless-python-requirements
 
