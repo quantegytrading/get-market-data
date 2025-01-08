@@ -18,6 +18,5 @@ var/
 
 .idea/
 node_modules/
-.github/
 # Serverless directories
 .serverless
