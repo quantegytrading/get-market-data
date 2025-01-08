@@ -45,5 +45,5 @@ def go(interval, since):
 
     sns.publish(
         TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
-        Message=json.dumps(message)
+        Message=json.dumps(market_data)
     )
