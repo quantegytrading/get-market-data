@@ -28,5 +28,4 @@ jobs:
       run: |
         terraform fmt
         terraform init
-#        terraform import aws_lambda_function.function quantegy-get-market-data
         terraform apply --auto-approve=true
