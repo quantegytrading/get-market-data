@@ -19,7 +19,7 @@ def init_exchange():
     return exchange
 
 
-def send_market_data(market_data, interval, sqs)
+def send_market_data(market_data, interval, sqs):
     message = {
         'exchange': 'binance',
         'data_type': 'live',
@@ -53,8 +53,3 @@ def go(interval, since):
                     market_data = []
 
     send_market_data(market_data, interval, sqs)
-
-
-    # print(exchange.currencies.keys())
-
-
