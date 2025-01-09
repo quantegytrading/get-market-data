@@ -47,4 +47,4 @@ def go(interval, since):
         Message=json.dumps(market_data)
     )
 
-    # print(json.dumps(result, indent=4, sort_keys=True))
+    print(json.dumps(result, indent=4, sort_keys=True))
