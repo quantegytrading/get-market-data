@@ -22,7 +22,7 @@ if [ -f "$FILE" ]; then
   echo "From: requirement.txt file exists..."
   pip download -r "$FILE" --platform manylinux2014_x86_64 --only-binary=:all:
   ls -altr
-  unzip *.whl
+  unzip "*.whl"
   rm -rf *.whl
 
 else
