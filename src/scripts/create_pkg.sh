@@ -21,7 +21,7 @@ cat $FILE
 if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirement.txt file exists..."
-  pip install -r "$FILE"
+  pip install -r "$FILE" --platform manylinux2014_x86_64
 
 else
   echo "Error: requirement.txt does not exist!"
