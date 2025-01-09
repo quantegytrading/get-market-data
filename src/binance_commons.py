@@ -20,7 +20,7 @@ def init_exchange():
 
 
 def go(interval, since):
-    sns = boto3.client('sns')
+    sqs = boto3.client('sqs')
     exchange = init_exchange()
     market_data = []
     if exchange.has['fetchOHLCV']:
@@ -41,9 +41,9 @@ def go(interval, since):
                     }
                     print(message)
 
-                    result = sns.publish(
-                        TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
-                        Message=json.dumps(market_data)
+                    result = sqs.send_message(
+                        QueueUrl='https://sqs.us-east-1.amazonaws.com/716418748259/quantegy-analyze-queue',
+                        MessageBody=json.dumps(market_data)
                     )
 
                     print(json.dumps(result, indent=4, sort_keys=True))
