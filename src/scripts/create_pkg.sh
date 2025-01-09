@@ -32,7 +32,6 @@ deactivate
 
 # Create deployment package...
 echo "Creating deployment package..."
-cd env_$function_name/lib/$runtime/site-packages/
 cp -r  env_$function_name/lib/$runtime/site-packages/* $path_cwd/
 ls -altr
 # Removing virtual environment folder...
