@@ -17,12 +17,26 @@ terraform {
 }
 
 
+resource "null_resource" "install_python_dependencies" {
+  provisioner "local-exec" {
+    command = "bash ${path.module}/scripts/create_pkg.sh"
+
+    environment = {
+      source_code_path = var.path_source_code
+      function_name = var.function_name
+      path_module = path.module
+      runtime = var.runtime
+      path_cwd = path.cwd
+    }
+  }
+}
 
 
 data "archive_file" "function_zip" {
   source_dir  = "src"
   type        = "zip"
   output_path = "${path.module}/quantegy-get-market-data.zip"
+  depends_on = [ null_resource.install_python_dependencies ]
 }
 
 resource "aws_s3_object" "file_upload" {
