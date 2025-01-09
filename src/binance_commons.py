@@ -26,7 +26,7 @@ def go(interval, since):
     market_data = []
     if exchange.has['fetchOHLCV']:
         for symbol in exchange.markets:
-            if symbol[-4:] == "/USDT":
+            if symbol[-4:] == "/USD":
                 data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
                 print(data)
                 item = {
