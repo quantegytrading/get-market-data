@@ -12,7 +12,6 @@ mkdir $dir_name
 
 # Create and activate virtual environment...
 virtualenv -p $runtime env_$function_name
-ls -altr
 source $path_cwd/env_$function_name/bin/activate
 
 # Installing python dependencies...
@@ -22,6 +21,7 @@ if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirement.txt file exists..."
   pip download -r "$FILE" --platform manylinux2014_x86_64 --only-binary=:all:
+  ls -altr
   unzip *.whl
   rm -rf *.whl
 
