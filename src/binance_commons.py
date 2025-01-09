@@ -21,7 +21,6 @@ def init_exchange():
 
 def go(interval, since):
     sns = boto3.client('sns')
-    dynamodb = boto3.resource('dynamodb')
     exchange = init_exchange()
     market_data = []
     if exchange.has['fetchOHLCV']:
@@ -29,7 +28,7 @@ def go(interval, since):
             if symbol[-4:] == "USDT":
                 data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
                 item = {
-                    'symbol': symbol[:-4],
+                    'symbol': symbol[:-5],
                     'data': data,
                 }
                 market_data.append(item)
