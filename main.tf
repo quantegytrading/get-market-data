@@ -22,11 +22,10 @@ resource "null_resource" "install_python_dependencies" {
     command = "bash ${path.module}/scripts/create_pkg.sh"
 
     environment = {
-      source_code_path = var.path_source_code
-      function_name = var.function_name
-      path_module = path.module
-      runtime = var.runtime
-      path_cwd = path.cwd
+      source_code_path = "${path.module}/src"
+      function_name = "quantegy_get_market_data"
+      runtime = "python3.10"
+      path_cwd = "${path.module}"
     }
   }
 }
