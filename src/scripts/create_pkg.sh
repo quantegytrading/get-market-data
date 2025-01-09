@@ -6,13 +6,14 @@ pip install virtualenv
 pwd
 
 cd $path_cwd
+cd src
 dir_name=lambda_dist_pkg/
 mkdir $dir_name
 
 # Create and activate virtual environment...
 virtualenv -p $runtime env_$function_name
 ls -altr
-source $path_cwd/../env_$function_name/bin/activate
+source $path_cwd/env_$function_name/bin/activate
 
 # Installing python dependencies...
 FILE=$path_cwd/requirements.txt
@@ -32,9 +33,8 @@ deactivate
 # Create deployment package...
 echo "Creating deployment package..."
 cd env_$function_name/lib/$runtime/site-packages/
-cp -r . $path_cwd/$dir_name
-cp -r $path_cwd/lambda_function/ $path_cwd/$dir_name
-
+cp -r  env_$function_name/lib/$runtime/site-packages/* $path_cwd/
+ls -altr
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
 rm -rf $path_cwd/env_$function_name
