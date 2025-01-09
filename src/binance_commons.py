@@ -26,14 +26,14 @@ def go(interval, since):
     market_data = []
     if exchange.has['fetchOHLCV']:
         for symbol in exchange.markets:
-            if symbol[-4:] == "USDT":
+            if symbol[-4:] == "/USD":
                 data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
-                print(data)
                 item = {
                     'symbol': symbol[:-4],
                     'data': data,
                 }
                 market_data.append(item)
+    print(exchange.currencies.keys())
 
     message = {
         'exchange': 'binance',
@@ -41,6 +41,7 @@ def go(interval, since):
         'interval': interval,
         'market_data': market_data
     }
+    print(message)
 
     sns.publish(
         TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
