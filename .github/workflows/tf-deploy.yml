@@ -29,4 +29,7 @@ jobs:
         terraform fmt
         terraform init
         terraform import aws_lambda_function.function quantegy-get-market-data
-        terraform apply --auto-approve=true
+        terraform apply -var="eid=${{ secrets.EXCHANGE_ID }}" \
+          -var="key=${{ secrets.API_KEY }}" \
+          -var="secret=${{ secrets.API_SECRET }}" \
+          --auto-approve=true

@@ -16,6 +16,21 @@ terraform {
   required_version = "~> 1.2"
 }
 
+variable "eid" {
+  default     = "binanceus"
+  description = "Crypto Exchange"
+}
+
+variable "key" {
+  default     = "key"
+  description = "API key"
+}
+
+variable "secret" {
+  default     = "secret"
+  description = "API secret"
+}
+
 
 resource "null_resource" "install_python_dependencies" {
   provisioner "local-exec" {
@@ -54,7 +69,13 @@ resource "aws_lambda_function" "function" {
   timeout                        = 900
   memory_size                    = 128
   role                           = "arn:aws:iam::716418748259:role/quantegy-ingest-live-us-east-1-lambdaRole"
-
+  environment {
+    variables = {
+      eid = var.eid
+      key = var.key
+      secret = var.secret
+    }
+  }
   depends_on = [ aws_s3_object.file_upload ]
 }
 
