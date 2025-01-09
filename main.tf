@@ -54,7 +54,6 @@ resource "aws_lambda_function" "function" {
   timeout                        = 900
   memory_size                    = 128
   role                           = "arn:aws:iam::716418748259:role/quantegy-ingest-live-us-east-1-lambdaRole"
-  layers = tolist(["arn:aws:lambda:us-east-1:716418748259:layer:quantegy-get-lambda-layer:1"])
 
   depends_on = [ aws_s3_object.file_upload ]
 }
