@@ -22,6 +22,8 @@ if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirement.txt file exists..."
   pip download -r "$FILE" --platform manylinux2014_x86_64 --only-binary=:all:
+  unzip *.whl
+  rm -rf *.whl
 
 else
   echo "Error: requirement.txt does not exist!"
