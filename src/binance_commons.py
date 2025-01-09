@@ -32,19 +32,23 @@ def go(interval, since):
                     'data': data,
                 }
                 market_data.append(item)
+                if len(market_data) == 10:
+                    message = {
+                        'exchange': 'binance',
+                        'data_type': 'live',
+                        'interval': interval,
+                        'market_data': market_data
+                    }
+                    print(message)
+
+                    result = sns.publish(
+                        TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
+                        Message=json.dumps(market_data)
+                    )
+
+                    print(json.dumps(result, indent=4, sort_keys=True))
+                    market_data = []
+
     # print(exchange.currencies.keys())
 
-    message = {
-        'exchange': 'binance',
-        'data_type': 'live',
-        'interval': interval,
-        'market_data': market_data
-    }
-    print(message)
 
-    result = sns.publish(
-        TargetArn='arn:aws:sns:us-east-1:716418748259:analyze-quantegy-data-soak',
-        Message=json.dumps(market_data)
-    )
-
-    print(json.dumps(result, indent=4, sort_keys=True))
