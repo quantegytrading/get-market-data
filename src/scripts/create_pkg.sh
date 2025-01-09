@@ -21,7 +21,7 @@ if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirement.txt file exists..."
   pip download -r "$FILE" --platform manylinux2014_x86_64 --only-binary=:all:
-  ls -altr
+#  ls -altr
   unzip "*.whl"
   rm -rf *.whl
 
@@ -35,7 +35,7 @@ deactivate
 # Create deployment package...
 echo "Creating deployment package..."
 cp -r  env_$function_name/lib/$runtime/site-packages/* $path_cwd/
-ls -altr
+#ls -altr
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
 rm -rf $path_cwd/env_$function_name
