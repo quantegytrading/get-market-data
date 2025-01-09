@@ -19,20 +19,7 @@ def init_exchange():
     return exchange
 
 
-def go(interval, since):
-    sqs = boto3.client('sqs')
-    exchange = init_exchange()
-    market_data = []
-    if exchange.has['fetchOHLCV']:
-        for symbol in exchange.markets:
-            if symbol[-4:] == "USDT":
-                data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
-                item = {
-                    'symbol': symbol[:-5],
-                    'data': data,
-                }
-                market_data.append(item)
-
+def send_market_data(market_data, interval, sqs)
     message = {
         'exchange': 'binance',
         'data_type': 'live',
@@ -47,7 +34,27 @@ def go(interval, since):
     )
 
     print(json.dumps(result, indent=4, sort_keys=True))
+
+def go(interval, since):
+    sqs = boto3.client('sqs')
+    exchange = init_exchange()
     market_data = []
+    if exchange.has['fetchOHLCV']:
+        for symbol in exchange.markets:
+            if symbol[-4:] == "USDT":
+                data = json.dumps(exchange.fetch_ohlcv(symbol, interval, since=since))
+                item = {
+                    'symbol': symbol[:-5],
+                    'data': data,
+                }
+                market_data.append(item)
+                if len(market_data) > 9:
+                    send_market_data(market_data, interval, sqs)
+                    market_data = []
+
+    send_market_data(market_data, interval, sqs)
+
+
     # print(exchange.currencies.keys())
 
 
