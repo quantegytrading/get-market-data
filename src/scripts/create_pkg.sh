@@ -17,7 +17,7 @@ source $path_cwd/env_$function_name/bin/activate
 
 # Installing python dependencies...
 FILE=$path_cwd/requirements.txt
-
+cat $FILE
 if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirement.txt file exists..."
