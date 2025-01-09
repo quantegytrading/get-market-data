@@ -32,23 +32,22 @@ def go(interval, since):
                     'data': data,
                 }
                 market_data.append(item)
-                if len(market_data) == 10:
-                    message = {
-                        'exchange': 'binance',
-                        'data_type': 'live',
-                        'interval': interval,
-                        'market_data': market_data
-                    }
-                    print(message)
 
-                    result = sqs.send_message(
-                        QueueUrl='https://sqs.us-east-1.amazonaws.com/716418748259/quantegy-analyze-queue',
-                        MessageBody=json.dumps(message)
-                    )
+    message = {
+        'exchange': 'binance',
+        'data_type': 'live',
+        'interval': interval,
+        'market_data': market_data
+    }
+    print(message)
 
-                    print(json.dumps(result, indent=4, sort_keys=True))
-                    market_data = []
+    result = sqs.send_message(
+        QueueUrl='https://sqs.us-east-1.amazonaws.com/716418748259/quantegy-analyze-queue',
+        MessageBody=json.dumps(message)
+    )
 
+    print(json.dumps(result, indent=4, sort_keys=True))
+    market_data = []
     # print(exchange.currencies.keys())
 
 
