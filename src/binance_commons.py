@@ -43,7 +43,7 @@ def go(interval, since):
 
                     result = sqs.send_message(
                         QueueUrl='https://sqs.us-east-1.amazonaws.com/716418748259/quantegy-analyze-queue',
-                        MessageBody=json.dumps(market_data)
+                        MessageBody=json.dumps(message)
                     )
 
                     print(json.dumps(result, indent=4, sort_keys=True))
