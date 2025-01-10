@@ -48,8 +48,8 @@ def go(interval, since):
                     'data': data,
                 }
                 market_data.append(item)
-                if len(market_data) > 9:
-                    send_market_data(market_data, interval, sqs)
-                    market_data = []
+                # if len(market_data) > 9:
+                #     send_market_data(market_data, interval, sqs)
+                #     market_data = []
 
     send_market_data(market_data, interval, sqs)
