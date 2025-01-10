@@ -35,6 +35,7 @@ def send_market_data(market_data, interval, sqs):
 
     print(json.dumps(result, indent=4, sort_keys=True))
 
+
 def go(interval, since):
     sqs = boto3.client('sqs')
     exchange = init_exchange()
